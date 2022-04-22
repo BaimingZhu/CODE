@@ -1,0 +1,1 @@
+"D:\wechatDev\微信web开发者工具\cli.bat" cloud functions deploy --e shating-32f7f0 --n quickstartFunctions --r --project "F:\CODE\Applet_demo" --report_first --report
