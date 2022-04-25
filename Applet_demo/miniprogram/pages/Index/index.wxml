@@ -1,0 +1,10 @@
+<view class="container">
+  <view class="main_area">
+    <view class="flex-item" wx:for="{{btn_arr}}" wx:key="id">
+      <view class="circle" wx:if="{{item.text}}">
+        <icon class="iconfont {{item.icon_name}}"></icon>
+      </view>
+      <text class="text_styl" wx:if="{{item.text}}">{{item.text}}</text>
+    </view>
+  </view>
+</view>

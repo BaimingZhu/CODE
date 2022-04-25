@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  padding: 0 60rpx;
 } 
 
 button {
@@ -24,4 +25,71 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+@font-face {
+  font-family: "iconfont"; /* Project id 3356753 */
+  src: url('//at.alicdn.com/t/font_3356753_9btrd76iush.woff2?t=1650861991538') format('woff2'),
+       url('//at.alicdn.com/t/font_3356753_9btrd76iush.woff?t=1650861991538') format('woff'),
+       url('//at.alicdn.com/t/font_3356753_9btrd76iush.ttf?t=1650861991538') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 110rpx;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tongsuo:before {
+  content: "\e66c";
+}
+
+.icon-kaiguan:before {
+  content: "\e621";
+}
+
+.icon-wenduzengjia:before {
+  content: "\e62e";
+}
+
+.icon-wendu:before {
+  content: "\e62f";
+}
+
+.icon-wendujiangdi:before {
+  content: "\e630";
+}
+
+.icon-zhileng-:before {
+  content: "\e684";
+}
+
+.icon-wendu1:before {
+  content: "\e608";
+}
+
+.icon-jiare:before {
+  content: "\e62b";
+}
+
+.icon-dianya:before {
+  content: "\e631";
+}
+
+.icon-shuidi:before {
+  content: "\e682";
+}
+
+.icon-wendu2:before {
+  content: "\e66b";
+}
+
+.icon-zhileng:before {
+  content: "\e638";
+}
+
+.icon-a-guihuatubiaoyuanwenjianFarlim_huaban1fuben10:before {
+  content: "\e60b";
 }

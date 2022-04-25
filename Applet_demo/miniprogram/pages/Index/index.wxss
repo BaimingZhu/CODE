@@ -1,0 +1,32 @@
+
+.main_area{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.flex-item{
+  width: 150rpx;
+  height: 200rpx;
+  font-size: 26rpx;
+  margin: 0 20rpx;
+  margin-top: 30rpx;
+}
+.circle{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 200rpx;
+  background-color: #cecece;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text_styl{
+  text-align: center;
+  display: block;
+  height: 20rpx;
+}
+
+

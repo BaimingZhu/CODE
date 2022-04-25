@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/Index/index",
     "pages/Bluetooth/index"
   ],
   "window": {
