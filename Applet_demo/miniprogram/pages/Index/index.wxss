@@ -29,4 +29,7 @@
   height: 20rpx;
 }
 
-
+.to_connect{
+  padding-top: 50rpx;
+  color: rgb(121, 120, 118);
+}

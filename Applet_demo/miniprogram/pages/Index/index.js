@@ -23,9 +23,10 @@ Page({
     //   icon: 'success',
     //   duration: 2000
     // })
-
-    wx.switchTab({
-      url: 'pages/Bluetooth/index'
-    })
   },
+  connect_bluetooth: function() {
+    wx.navigateTo({
+      url: '/pages/Bluetooth/index',
+    })
+  }
 })
