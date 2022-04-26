@@ -17,7 +17,7 @@
   width: 150rpx;
   height: 150rpx;
   border-radius: 200rpx;
-  background-color: #cecece;
+  background-color: #e7e4e4e1;
   display: flex;
   justify-content: center;
   align-items: center;

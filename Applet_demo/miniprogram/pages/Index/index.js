@@ -18,5 +18,14 @@ Page({
     ]
   },
   onLoad: function () {
+    // wx.showToast({
+    //   title: '成功',
+    //   icon: 'success',
+    //   duration: 2000
+    // })
+
+    wx.switchTab({
+      url: 'pages/Bluetooth/index'
+    })
   },
 })
