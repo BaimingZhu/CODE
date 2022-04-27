@@ -34,6 +34,11 @@ Page({
       },
       fail: (res) => {
         if (res.errCode === 10001) {
+          wx.showToast({
+            title: '请检查蓝牙是否开启',
+            icon: 'error',
+            duration: 2000
+          })
           wx.onBluetoothAdapterStateChange(function (res) {
             console.log('onBluetoothAdapterStateChange', res)
             if (res.available) {
@@ -56,6 +61,7 @@ Page({
       }
     })
   },
+  //开始搜索设备
   startBluetoothDevicesDiscovery() {
     if (this._discoveryStarted) {
       return
@@ -72,6 +78,7 @@ Page({
   stopBluetoothDevicesDiscovery() {
     wx.stopBluetoothDevicesDiscovery()
   },
+  //扫描到了蓝牙设备
   onBluetoothDeviceFound() {
     wx.onBluetoothDeviceFound((res) => {
       res.devices.forEach(device => {
@@ -90,6 +97,7 @@ Page({
       })
     })
   },
+  //连接蓝牙低功耗设备
   createBLEConnection(e) {
     const ds = e.currentTarget.dataset
     const deviceId = ds.deviceId
@@ -130,6 +138,7 @@ Page({
       }
     })
   },
+  //获取蓝牙低功耗设备某个服务中所有特征
   getBLEDeviceCharacteristics(deviceId, serviceId) {
     wx.getBLEDeviceCharacteristics({
       deviceId,
@@ -197,7 +206,7 @@ Page({
     dataView.setUint8(0, Math.random() * 255 | 0)
     wx.writeBLECharacteristicValue({
       deviceId: this._deviceId,
-      serviceId: this._deviceId,
+      serviceId: this._serviceId,
       characteristicId: this._characteristicId,
       value: buffer,
     })
