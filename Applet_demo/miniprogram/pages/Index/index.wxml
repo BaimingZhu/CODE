@@ -7,4 +7,5 @@
       <text class="text_styl" wx:if="{{item.text}}">{{item.text}}</text>
     </view>
   </view>
+  <view class="to_connect" bindtap="connect_bluetooth">连接设备>>></view>
 </view>
