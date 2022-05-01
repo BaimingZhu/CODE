@@ -25,6 +25,14 @@ Page({
     devices: [],
     connected: false,
     chs: [],
+    name: '',
+  },
+  onShow(){
+    console.log('Bluetooth onShow')
+    var devices = app.globalData.devices || this.data.devices
+    var connected = app.globalData.connected || this.data.connected
+    var name = app.globalData.name || this.data.name
+    this.setData({devices, connected, name})
   },
   openBluetoothAdapter() {
     wx.openBluetoothAdapter({
@@ -95,6 +103,8 @@ Page({
         }
         this.setData(data)
       })
+
+      app.globalData.devices = this.data.devices
     })
   },
   //连接蓝牙低功耗设备
@@ -110,6 +120,13 @@ Page({
           name,
           deviceId,
         })
+        
+        const eventChannel = this.getOpenerEventChannel()
+        eventChannel.emit('connectedChange', {connected: true});
+        app.globalData.name = name
+        app.globalData.deviceId = deviceId
+        app.globalData.connected = true
+
         this.getBLEDeviceServices(deviceId)
       }
     })
@@ -117,13 +134,16 @@ Page({
   },
   closeBLEConnection() {
     wx.closeBLEConnection({
-      deviceId: this.data.deviceId
+      deviceId: app.globalData.deviceId
     })
     this.setData({
       connected: false,
       chs: [],
       canWrite: false,
     })
+    const eventChannel = this.getOpenerEventChannel()
+    eventChannel.emit('connectedChange', {connected: false});
+    app.globalData.connected = false
   },
   getBLEDeviceServices(deviceId) {
     wx.getBLEDeviceServices({
@@ -154,14 +174,14 @@ Page({
               characteristicId: item.uuid,
             })
           }
-          if (item.properties.write) {
+          if (item.properties.write && !item.properties.writeNoResponse) {
             this.setData({
               canWrite: true
             })
-            this._deviceId = deviceId
-            this._serviceId = serviceId
-            this._characteristicId = item.uuid
-            this.writeBLECharacteristicValue()
+            app.globalData._deviceId = deviceId
+            app.globalData._serviceId = serviceId
+            app.globalData._characteristicId = item.uuid
+            this.writeBLECharacteristicValue() //第一次不发送数据
           }
           if (item.properties.notify || item.properties.indicate) {
             wx.notifyBLECharacteristicValueChange({
@@ -199,15 +219,22 @@ Page({
       this.setData(data)
     })
   },
-  writeBLECharacteristicValue() {
-    // 向蓝牙设备发送一个0x00的16进制数据
-    let buffer = new ArrayBuffer(1)
+  writeBLECharacteristicValue(str) { 
+    str = "00"
+    // var str = "A5 FC 02 00 A0 9C 01 00 E0 02 FB"
+    str = str.trim()
+    var array = str.split(' ').map(item => parseInt(item, 16))
+    var buffer = new ArrayBuffer(array.length)
     let dataView = new DataView(buffer)
-    dataView.setUint8(0, Math.random() * 255 | 0)
+    array.forEach((item, index) => {
+        dataView.setUint8(index, item)
+    })
+
+    console.log(app.globalData._deviceId, app.globalData._serviceId, app.globalData._characteristicId)
     wx.writeBLECharacteristicValue({
-      deviceId: this._deviceId,
-      serviceId: this._serviceId,
-      characteristicId: this._characteristicId,
+      deviceId: app.globalData._deviceId,
+      serviceId: app.globalData._serviceId,
+      characteristicId: app.globalData._characteristicId,
       value: buffer,
     })
   },

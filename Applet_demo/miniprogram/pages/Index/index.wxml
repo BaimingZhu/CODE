@@ -1,11 +1,12 @@
 <view class="container">
   <view class="main_area">
-    <view class="flex-item" wx:for="{{btn_arr}}" wx:key="id">
+    <view class="flex-item" wx:for="{{btn_arr}}" wx:key="id" bindtap="sendBLECharacteristicValue" data-index="{{index}}">
       <view class="circle" wx:if="{{item.text}}">
         <icon class="iconfont {{item.icon_name}}"></icon>
       </view>
       <text class="text_styl" wx:if="{{item.text}}">{{item.text}}</text>
     </view>
   </view>
-  <view class="to_connect" bindtap="connect_bluetooth">连接设备>>></view>
+  <view class="to_connect" bindtap="connect_bluetooth" wx:if="{{!connected}}">连接设备>>></view>
+  <view class="to_connect" bindtap="connect_bluetooth" wx:else>已连接</view>
 </view>
