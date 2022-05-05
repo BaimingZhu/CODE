@@ -149,6 +149,7 @@ Page({
     wx.getBLEDeviceServices({
       deviceId,
       success: (res) => {
+        console.log('Services', res)
         for (let i = 0; i < res.services.length; i++) {
           if (res.services[i].isPrimary) {
             this.getBLEDeviceCharacteristics(deviceId, res.services[i].uuid)
@@ -218,6 +219,10 @@ Page({
       // }
       this.setData(data)
     })
+
+    setTimeout(function() {
+      wx.navigateBack()
+    }, 100)
   },
   writeBLECharacteristicValue(str) { 
     str = "00"

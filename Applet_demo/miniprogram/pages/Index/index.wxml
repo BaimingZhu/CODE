@@ -1,12 +1,32 @@
 <view class="container">
   <view class="main_area">
     <view class="flex-item" wx:for="{{btn_arr}}" wx:key="id" bindtap="sendBLECharacteristicValue" data-index="{{index}}">
-      <view class="circle" wx:if="{{item.text}}">
-        <icon class="iconfont {{item.icon_name}}"></icon>
+      
+      <view wx:if="{{item.text && item.id != 4}}">
+        <view class="circle" style="color: #0084ff;" wx:if="{{ item.id == 1 && child_lock}}">
+          <icon class="iconfont {{item.icon_name}}"></icon>
+        </view>
+        <view class="circle" wx:else>
+          <icon class="iconfont {{item.icon_name}}"></icon>
+        </view>
+        <text class="text_styl">{{item.text}}</text>
       </view>
-      <text class="text_styl" wx:if="{{item.text}}">{{item.text}}</text>
+
+      <view wx:if="{{item.id == 4}}">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker">
+            <view class="circle">
+              <icon class="iconfont {{item.icon_name}}"></icon>
+            </view>
+            <text class="text_styl">{{item.text}}</text>
+          </view>
+        </picker>
+      </view>
+
     </view>
   </view>
   <view class="to_connect" bindtap="connect_bluetooth" wx:if="{{!connected}}">连接设备>>></view>
   <view class="to_connect" bindtap="connect_bluetooth" wx:else>已连接</view>
+
+
 </view>
