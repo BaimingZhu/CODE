@@ -168,30 +168,33 @@ Page({
         console.log('getBLEDeviceCharacteristics success', res.characteristics)
         for (let i = 0; i < res.characteristics.length; i++) {
           let item = res.characteristics[i]
-          if (item.properties.read) {
-            wx.readBLECharacteristicValue({
-              deviceId,
-              serviceId,
-              characteristicId: item.uuid,
-            })
-          }
-          if (item.properties.write && !item.properties.writeNoResponse) {
+          // if (item.properties.read) {
+          //   wx.readBLECharacteristicValue({
+          //     deviceId,
+          //     serviceId,
+          //     characteristicId: item.uuid,
+          //   })
+          // }
+          if (item.properties.write) {
+          // if (item.properties.write && !item.properties.writeNoResponse) {
             this.setData({
               canWrite: true
             })
             app.globalData._deviceId = deviceId
             app.globalData._serviceId = serviceId
             app.globalData._characteristicId = item.uuid
-            this.writeBLECharacteristicValue() //第一次不发送数据
+            // this.writeBLECharacteristicValue() //第一次不发送数据
+            // this.writeBLECharacteristicValue() //第一次不发送数据
+            break;
           }
-          if (item.properties.notify || item.properties.indicate) {
-            wx.notifyBLECharacteristicValueChange({
-              deviceId,
-              serviceId,
-              characteristicId: item.uuid,
-              state: true,
-            })
-          }
+          // if (item.properties.notify || item.properties.indicate) {
+          //   wx.notifyBLECharacteristicValueChange({
+          //     deviceId,
+          //     serviceId,
+          //     characteristicId: item.uuid,
+          //     state: true,
+          //   })
+          // }
         }
       },
       fail(res) {
@@ -199,26 +202,26 @@ Page({
       }
     })
     // 操作之前先监听，保证第一时间获取数据
-    wx.onBLECharacteristicValueChange((characteristic) => {
-      const idx = inArray(this.data.chs, 'uuid', characteristic.characteristicId)
-      const data = {}
-      if (idx === -1) {
-        data[`chs[${this.data.chs.length}]`] = {
-          uuid: characteristic.characteristicId,
-          value: ab2hex(characteristic.value)
-        }
-      } else {
-        data[`chs[${idx}]`] = {
-          uuid: characteristic.characteristicId,
-          value: ab2hex(characteristic.value)
-        }
-      }
-      // data[`chs[${this.data.chs.length}]`] = {
-      //   uuid: characteristic.characteristicId,
-      //   value: ab2hex(characteristic.value)
-      // }
-      this.setData(data)
-    })
+    // wx.onBLECharacteristicValueChange((characteristic) => {
+    //   const idx = inArray(this.data.chs, 'uuid', characteristic.characteristicId)
+    //   const data = {}
+    //   if (idx === -1) {
+    //     data[`chs[${this.data.chs.length}]`] = {
+    //       uuid: characteristic.characteristicId,
+    //       value: ab2hex(characteristic.value)
+    //     }
+    //   } else {
+    //     data[`chs[${idx}]`] = {
+    //       uuid: characteristic.characteristicId,
+    //       value: ab2hex(characteristic.value)
+    //     }
+    //   }
+    //   // data[`chs[${this.data.chs.length}]`] = {
+    //   //   uuid: characteristic.characteristicId,
+    //   //   value: ab2hex(characteristic.value)
+    //   // }
+    //   this.setData(data)
+    // })
 
     setTimeout(function() {
       wx.navigateBack()
