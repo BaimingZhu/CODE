@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/TableBlue/index",
     "pages/Index/index",
     "pages/Bluetooth/index"
   ],

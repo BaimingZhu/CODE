@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="header_area">
+    <h2>智能取暖桌</h2>
+    <view class="setting">
+      <image class="svg_icon-inner" src="../../src/icon/cog.svg"></image>
+    </view>
+  </view>
+
+  <view class="third_area">
+    <view class="button-group">
+      <view class="outter-circle">
+        <view class="inner-parts brown" bindtap="button" data-type="volAdd">
+          <view class="rotate">
+            <image class="part3_svg" src="../../src/icon/chevron-up.svg"></image>
+          </view>
+        </view>
+        <view class="inner-parts silver" bindtap="button" data-type="chaAdd">
+          <view class="rotate">
+            <image class="part3_svg" style=" transform: rotate(90deg);" src="../../src/icon/chevron-up.svg"></image>
+          </view>
+        </view>
+        <view class="inner-parts blue" bindtap="button" data-type="chaDes">
+          <view class="rotate">
+            <image class="part3_svg" style=" transform: rotate(-90deg);" src="../../src/icon/chevron-up.svg"></image>
+          </view>
+        </view>
+        <view class="inner-parts gold" bindtap="button" data-type="volDes">
+          <view class="rotate">
+            <image class="part3_svg" style=" transform: rotate(180deg);" src="../../src/icon/chevron-up.svg"></image>
+          </view>
+        </view>
+        <view class="inner-circle" bindtap="button" data-type="ok">
+          <view class="ok rotate">
+            <image class="part3_svg" style=" " src="../../src/icon/power.svg"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="second_area">
+    <view class="item">
+      <image class="second_svg_icon" src="../../src/icon/arrow-circle-up-f.svg"></image>
+      <text>上升</text>
+    </view>
+    <view class="item">
+      <image class="second_svg_icon" src="../../src/icon//arrow-circle-down-f.svg"></image>
+      <text>下降</text>
+    </view>
+  </view>
+</view>
